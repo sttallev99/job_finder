@@ -6,6 +6,15 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 const cors = require('cors');
 
+//database connecton
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+}).then(() => console.log('DB connected!'))
+    .catch((err) => console.log(err));
+
 //port
 const port  = process.env.PORT || 9000;
 
