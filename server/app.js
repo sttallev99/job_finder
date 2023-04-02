@@ -7,7 +7,8 @@ require('dotenv').config();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const errorHandler = require('./middleware/error')
+const errorHandler = require('./middleware/error');
+const authRoutes = require('./routes/authRoutes');
 
 //database connecton
 mongoose.connect(process.env.DATABASE, {
@@ -28,6 +29,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(cors());
+
+//ROUTES MIDDLEWARE
+app.use('/api', authRoutes);
+// app.get('/', (req, res) => {
+//     res.send('Hello from Node js');
+// })
 
 //error middleware
 app.use(errorHandler);
