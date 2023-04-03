@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 
 const errorHandler = require('./middleware/error');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //database connecton
 mongoose.connect(process.env.DATABASE, {
@@ -32,9 +33,7 @@ app.use(cors());
 
 //ROUTES MIDDLEWARE
 app.use('/api', authRoutes);
-// app.get('/', (req, res) => {
-//     res.send('Hello from Node js');
-// })
+app.use('/api', userRoutes);
 
 //error middleware
 app.use(errorHandler);

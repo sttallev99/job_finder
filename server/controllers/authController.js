@@ -53,6 +53,17 @@ const sendTokenResponse = async (user, codeStatus, res) => {
         .json({ success: true, token, user })
 }
 
+// user profile
+exports.userProfile = async (req, res, next) => {
+
+    const user = await User.findById(req.user.id).select('-password');
+
+    res.status(200).json({
+        success: true,
+        user
+    });
+}
+
 // log out
 exports.logout = (req, res, next) => {
     res.clearCookie('token');
