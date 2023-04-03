@@ -40,12 +40,28 @@ exports.singleUser = async (req, res, next) => {
 
     }
 }
+
+//edit user
 exports.editUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json({
             success: true,
             user
+        });
+
+    } catch (error) {
+
+    }
+}
+
+//delete user
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndRemove(req.user.id);
+        res.status(200).json({
+            success: true,
+            message: 'user deleted'
         });
 
     } catch (error) {
