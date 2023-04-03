@@ -28,3 +28,27 @@ exports.allUsers = async (req, res, next) => {
 }
 
 //show single user
+exports.singleUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json({
+            success: true,
+            user
+        });
+        
+    } catch (error) {
+
+    }
+}
+exports.editUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json({
+            success: true,
+            user
+        });
+
+    } catch (error) {
+
+    }
+}
