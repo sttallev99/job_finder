@@ -1,0 +1,1 @@
+const jobType = require('../models/jobTitleModel');
