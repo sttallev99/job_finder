@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
-const jobTitleSchema = new mongoose.Schema({
+const jobTypeSchema = new mongoose.Schema({
 
     jobTypeName: {
         type: String,
@@ -11,10 +12,11 @@ const jobTitleSchema = new mongoose.Schema({
 
     user: {
         type: ObjectId,
-        ref: 'User',
+        ref:  'User',
         required: true
-    },
+    }
 
 }, {timestamps: true});
 
-module.exports = mongoose.model('JobType', jobTitleSchema)
+
+module.exports = mongoose.model('JobType', jobTypeSchema);

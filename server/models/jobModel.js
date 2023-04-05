@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const jobSchema = new mongoose.Schema({
 
@@ -12,7 +13,7 @@ const jobSchema = new mongoose.Schema({
     description: {
         type: String,
         trim: true,
-        required: [true, 'Description is required']
+        required: [true, 'Salary is required']
     },
 
     salary: {
@@ -25,18 +26,24 @@ const jobSchema = new mongoose.Schema({
         type: String
     },
 
-    user: {
+    available: {
+        type: Boolean,
+        default: true
+    },
+
+    jobType: {
         type: ObjectId,
-        ref: 'jobType',
+        ref:  'JobType',
         required: true
     },
 
     user: {
         type: ObjectId,
-        ref: 'User',
+        ref:  'User',
         required: true
     },
 
 }, {timestamps: true});
 
-module.exports = mongoose.model('Job', jobSchema)
+
+module.exports = mongoose.model('Job', jobSchema);
