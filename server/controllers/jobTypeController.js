@@ -29,3 +29,29 @@ exports.allJobType = async (req, res, next) => {
         next(eror);
     }
 }
+
+//update job category
+exports.updateJobType = async (req, res, next) => {
+    try {
+        const jobT = await JobType.findByIdAndUpdate(req.params.type_id, req.body, {new: true});
+        res.status(200).json({
+            success: true,
+            jobT
+        })
+    } catch (error) {
+        next(eror);
+    }
+}
+
+//delete job category
+exports.deleteJobType = async (req, res, next) => {
+    try {
+        const jobT = await JobType.findByIdAndRemove(req.params.type_id);
+        res.status(200).json({
+            success: true,
+            message: "Job type deleted"
+        })
+    } catch (error) {
+        next(new ErrorResponse("Server error", 500));
+    }
+}
