@@ -1,4 +1,5 @@
 const Job = require('../models/jobModel');
+const JobType = require('../models/jobTypeModel');
 const ErrorResponse = require('../utils/errorResonse');
 
 //create job category
@@ -57,19 +58,30 @@ exports.showJobs = async (req, res, next) => {
         }
     } : {}
 
+    //filter jobs by category ids
+    let ids = [];
+    const jobTypeCategory = await JobType.find({}, {_id:1});
+    jobTypeCategory.forEach(cat => {
+        ids.push(cat._id);
+    });
+
+    let cat = req.query.cat;
+    let categ = cat !== '' ? cat : ids;
+
     //enable pagination
     const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1;
     //const count = await Job.find({}).estimatedDocumentCount();
-    const count = await Job.find({...keyword}).countDocuments();
+    const count = await Job.find({...keyword, categ}).countDocuments();
 
     try {
-        const jobs = await Job.find({...keyword}).skip(pageSize * (page - 1));
+        const jobs = await Job.find({...keyword, categ}).skip(pageSize * (page - 1));
         res.status(200).json({
             success: true,
             jobs,
             page,
             pages: Math.ceil(count / pageSize),
+            count,
             count
         });
     } catch (error) {
