@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { jobLoadAction } from '../redux/actions/jobAction';
 import CardElement from '../components/CardElement';
+import Footer from '../components/Footer';
 
 const Home = () => {
   const { jobs, setUniqueLocation, pages, loading} = useSelector(state => state.loadJob)
@@ -61,6 +62,7 @@ const Home = () => {
             </Stack>
         </Container>
       </Box>
+      <Footer />
     </>
   )
 }
