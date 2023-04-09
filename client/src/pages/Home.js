@@ -10,6 +10,8 @@ import { jobLoadAction } from '../redux/actions/jobAction';
 import CardElement from '../components/CardElement';
 import Footer from '../components/Footer';
 import LoadingBox from '../components/LoadingBox';
+import SelectComponent from '../components/SelectComponent';
+import { jobTypeLoadAction } from '../redux/actions/jobTypeAction';
 
 const Home = () => {
   const { jobs, setUniqueLocation, pages, loading} = useSelector(state => state.loadJob)
@@ -23,7 +25,16 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(jobLoadAction(page, keyword, cat, location));
-  }, [page, keyword, cat, location])
+  }, [page, keyword, cat, location]);
+
+  useEffect(() => {
+    dispatch(jobTypeLoadAction());
+  }, []);
+  
+  const handleChangeCategory = (e) => {
+    setCat(e.target.value);
+  }
+
   return (
     <>
       <Box sx={{ bgcolor: "fafafa", minHeight: "100vh" }}>
@@ -35,13 +46,23 @@ const Home = () => {
               spacing={{ xs: 1, sm: 2, md: 4 }}
             >
               <Box sx={{ flex: 2, p:2}}>
+                {/*filter by job category*/}
                 <Card sx={{minWidth: 150, mb: 3, mt: 3, p: 2}}>
                   <Box xs={{ pd: 2}}>
                       <Typography component='h4' sx={{ color: palette.secondary.main, fontWeight: 600 }}>
                         Filter job by category
                       </Typography>
-
                   </Box>
+                  <SelectComponent handleChangeCategory={handleChangeCategory} cat={cat} />
+                </Card>
+                {/*filter by location*/}
+                <Card sx={{minWidth: 150, mb: 3, mt: 3, p: 2}}>
+                  <Box xs={{ pd: 2}}>
+                      <Typography component='h4' sx={{ color: palette.secondary.main, fontWeight: 600 }}>
+                        Filter job by category
+                      </Typography>
+                  </Box>
+                  <SelectComponent handleChangeCategory={handleChangeCategory} cat={cat} />
                 </Card>
               </Box>
               <Box sx={{ flex: 5, p:2}}>

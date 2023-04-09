@@ -11,10 +11,6 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 const CardElement = ({ jobTitle, description, category, location, id }) => {
-    console.log(jobTitle);
-    console.log(description);
-    console.log(category);
-    console.log(location);
 
     const { palette } = useTheme();
     return (
