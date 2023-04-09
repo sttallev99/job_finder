@@ -1,14 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Box, Card, Container, Stack, Typography } from '@mui/material';
+import { useTheme } from '@emotion/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
+import { jobLoadAction } from '../redux/actions/jobAction';
 
 const Home = () => {
+  const { jobs, setUniqueLocation, pages, loading} = useSelector(state => state.loadJob)
+  const {palette} = useTheme();
+  const dispatch = useDispatch();
+
+  const { keyword, location } = useParams()
+
+  const [page, setPage] = useState(1);
+  const [cat, setCat] = useState('');
+
+  useEffect(() => {
+    dispatch(jobLoadAction(page, keyword, cat, location));
+  }, [page, keyword, cat, location])
   return (
     <>
-      <Navbar />
-      <Header />
-      <h1>Home page</h1>
+      <Box sx={{ bgcolor: "fafafa", minHeight: "100vh" }}>
+        <Navbar />
+        <Header />
+        <Container>
+            <Stack
+              direction={{ xs: 'column', sm: 'row'}}
+              spacing={{ xs: 1, sm: 2, md: 4 }}
+            >
+              <Box sx={{ flex: 2, p:2}}>
+                <Card sx={{minWidth: 150, mb: 3, mt: 3, p: 2}}>
+                  <Box xs={{ pd: 2}}>
+                      <Typography component='h4' sx={{ color: palette.secondary.main, fontWeight: 600 }}>
+                        Filter job by category
+                      </Typography>
+
+                  </Box>
+                </Card>
+              </Box>
+              <Box sx={{ flex: 5, p:2}}>
+                {jobs && jobs.map(job => <h1>{job.title}</h1>)}
+              </Box>
+
+            </Stack>
+        </Container>
+      </Box>
     </>
   )
 }

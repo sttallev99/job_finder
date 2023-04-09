@@ -76,17 +76,17 @@ exports.showJobs = async (req, res, next) => {
     });
     const setUniqueLocation = [...new Set(locations)];
     let location = req.query.location;
-    console.log(location)
     let locationFilter = location !== '' ? location : setUniqueLocation
 
     //enable pagination
     const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1;
     //const count = await Job.find({}).estimatedDocumentCount();
-    const count = await Job.find({...keyword, categ, location: locationFilter}).countDocuments();
+    const count = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).countDocuments();
+    console.log(count)
 
     try {
-        const jobs = await Job.find({...keyword, categ, location: locationFilter}).sort({ createdAt: -1 }).skip(pageSize * (page - 1));
+        const jobs = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).sort({ createdAt: -1 }).skip(pageSize * (page - 1)).limit(pageSize)
         res.status(200).json({
             success: true,
             jobs,
@@ -94,6 +94,7 @@ exports.showJobs = async (req, res, next) => {
             pages: Math.ceil(count / pageSize),
             count,
             setUniqueLocation
+
         });
     } catch (error) {
         next(eror);
