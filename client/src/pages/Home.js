@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import { jobLoadAction } from '../redux/actions/jobAction';
 import CardElement from '../components/CardElement';
 import Footer from '../components/Footer';
+import LoadingBox from '../components/LoadingBox';
 
 const Home = () => {
   const { jobs, setUniqueLocation, pages, loading} = useSelector(state => state.loadJob)
@@ -44,16 +45,32 @@ const Home = () => {
                 </Card>
               </Box>
               <Box sx={{ flex: 5, p:2}}>
-                {jobs && jobs.map((job, i) => {
-                  return <CardElement
-                    key={i}
-                    id={job._id}
-                    jobTitle={job.title}
-                    description={job.description}
-                    category={job.jobType ? job.jobType.jobTypeName : 'No category'}
-                    location={job.location}
-                  />
-                })}
+                {
+                  loading ?
+                    <LoadingBox /> :
+                    jobs && jobs.length === 0 ?
+                      <>
+                        <Box
+                            sx={{
+                                minHeight: '500px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                            <h2>No results found!</h2>
+                        </Box>
+                      </> :
+                
+                      jobs && jobs.map((job, i) => {
+                        return <CardElement
+                          key={i}
+                          id={job._id}
+                          jobTitle={job.title}
+                          description={job.description}
+                          category={job.jobType ? job.jobType.jobTypeName : 'No category'}
+                          location={job.location}
+                        />
+                      })}
                 <Stack spacing={2} >
                   <Pagination page={page} count={pages === 0 ? 1 : pages} onChange={(event, value) => setPage(value)} />
                 </Stack>
