@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Card, Container, Pagination, Stack, Typography } from '@mui/material';
+import { Box, Card, Container, ListItem, ListItemIcon, MenuItem, Pagination, Stack, Typography } from '@mui/material';
+import MenuList from '@mui/material/MenuList'
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useTheme } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
@@ -55,14 +57,25 @@ const Home = () => {
                   </Box>
                   <SelectComponent handleChangeCategory={handleChangeCategory} cat={cat} />
                 </Card>
-                {/*filter by location*/}
+                {/*filter by location */}
                 <Card sx={{minWidth: 150, mb: 3, mt: 3, p: 2}}>
                   <Box xs={{ pd: 2}}>
                       <Typography component='h4' sx={{ color: palette.secondary.main, fontWeight: 600 }}>
-                        Filter job by category
+                        Filter job by location
                       </Typography>
+                      <MenuList>
+                        {
+                          setUniqueLocation && setUniqueLocation.map((location, i) => (
+                            <MenuItem key={i}>
+                                <ListItemIcon>
+                                  <LocationOnIcon sx={{ color: palette.secondary.main, fontSize: 18 }} />
+                                </ListItemIcon>
+                                <Link to={`/search/location/${location}`}>{location}</Link>
+                            </MenuItem>
+                          ))
+                        }
+                      </MenuList>
                   </Box>
-                  <SelectComponent handleChangeCategory={handleChangeCategory} cat={cat} />
                 </Card>
               </Box>
               <Box sx={{ flex: 5, p:2}}>
