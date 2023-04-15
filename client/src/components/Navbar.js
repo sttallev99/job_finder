@@ -22,7 +22,7 @@ const pages = ['Home', 'Log In'];
 
 const Navbar = () => {
 
-    const { userInfo } = useSelector(state => state.signIn)
+    const { userInfo } = useSelector(state => state.signIn);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -47,12 +47,11 @@ const Navbar = () => {
 
     const logOutUser = () => {
         dispatch(userLogoutAction());
-        // navigate('/');
-        // window.location.reload(true);
-        // setTimeout(() => {
-        //     navigate('/');
-        // }, 500);
-        // console.log('clicked')
+        navigate('/');
+        window.location.reload(true);
+        setTimeout(() => {
+            navigate('/');
+        }, 500);
     }
 
     return (
