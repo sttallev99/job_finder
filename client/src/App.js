@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { theme } from './theme';
 import LogIn from './pages/LogIn';
+import UserDashboard from './pages/user/UserDashboard';
+import UserRoute from './components/UserRoute';
 
 const App = () => {
 
@@ -22,6 +24,7 @@ const App = () => {
             <Route path='/search/location/:location' element={<Home /> }/>
             <Route path='/search/:keyword' element={<Home /> }/>
             <Route path='/login' element={<LogIn /> }/>
+            <Route path='/user/dashboard' element={<UserRoute><UserDashboard /></UserRoute> } />
             <Route path='*' element={<NotFound /> }/>
           </Routes>
         </BrowserRouter>

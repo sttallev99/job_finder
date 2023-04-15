@@ -21,8 +21,8 @@ const pages = ['Home', 'Log In'];
 
 
 const Navbar = () => {
-    //show / hide button
-    const { userInfo } = useSelector(state => state.signIn);
+
+    const { userInfo } = useSelector(state => state.signIn)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -45,16 +45,15 @@ const Navbar = () => {
         setAnchorElUser(null);
     };
 
-    // // log out user
-    // const logOutUser = () => {
-    //     dispatch(userLogoutAction());
-    //     window.location.reload(true);
-    //     setTimeout(() => {
-    //         navigate('/');
-    //     }, 500)
-    // }
-
-
+    const logOutUser = () => {
+        dispatch(userLogoutAction());
+        // navigate('/');
+        // window.location.reload(true);
+        // setTimeout(() => {
+        //     navigate('/');
+        // }, 500);
+        // console.log('clicked')
+    }
 
     return (
         <AppBar position="static">
@@ -178,13 +177,14 @@ const Navbar = () => {
                             {
                                 !userInfo ?
 
-                                    <MenuItem onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
-                                    </MenuItem> :
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
+                            </MenuItem>  :
 
-                                    <MenuItem /*{onClick={logOutUser}}*/>
-                                        <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
-                                    </MenuItem>
+                            <MenuItem onClick={logOutUser}>
+                                <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
+                            </MenuItem>
+
                             }
 
 
