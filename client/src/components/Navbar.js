@@ -23,6 +23,7 @@ const pages = ['Home', 'Log In'];
 const Navbar = () => {
 
     const { userInfo } = useSelector(state => state.signIn);
+    console.log(userInfo)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -45,13 +46,12 @@ const Navbar = () => {
         setAnchorElUser(null);
     };
 
-    const logOutUser = () => {
+    const logout = () => {
         dispatch(userLogoutAction());
-        navigate('/');
         window.location.reload(true);
         setTimeout(() => {
             navigate('/');
-        }, 500);
+        }, 1000)
     }
 
     return (
@@ -180,7 +180,7 @@ const Navbar = () => {
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
                             </MenuItem>  :
 
-                            <MenuItem onClick={logOutUser}>
+                            <MenuItem onClick={logout}>
                                 <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
                             </MenuItem>
 
