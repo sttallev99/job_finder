@@ -1,4 +1,8 @@
-import { USER_LOGOUT_FAIL, 
+import { USER_LOAD_FAIL, 
+        USER_LOAD_REQUEST, 
+        USER_LOAD_RESET, 
+        USER_LOAD_SUCCESS, 
+        USER_LOGOUT_FAIL, 
         USER_LOGOUT_REQUEST, 
         USER_LOGOUT_RESET, 
         USER_LOGOUT_SUCCESS, 
@@ -40,6 +44,25 @@ export const userReducerLogout = (state = {}, action) => {
         case USER_LOGOUT_FAIL:
             return { loading: false, error: action.payload }
         case USER_LOGOUT_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
+
+//user profile
+export const userReducerProfile = (state = {}, action) => {
+    switch(action.type) {
+        case USER_LOAD_REQUEST:
+            return { loading: true }
+        case USER_LOAD_SUCCESS:
+            return {
+                loading: false,
+                user: action.payload
+            }
+        case USER_LOAD_FAIL:
+            return { loading: false, error: action.payload }
+        case USER_LOAD_RESET:
             return {}
         default:
             return state;
