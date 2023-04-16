@@ -12,9 +12,11 @@ import LogIn from './pages/LogIn';
 import UserDashboard from './pages/user/UserDashboard';
 import UserRoute from './components/UserRoute';
 import Layout from './pages/global/Layout';
+import UserJobsHistory from './pages/user/UserJobsHistory';
 
 //HOC
 const UserDashboardHOC = Layout(UserDashboard);
+const UserJobsHisotryHOC = Layout(UserJobsHistory);
 
 const App = () => {
 
@@ -31,6 +33,7 @@ const App = () => {
               <Route path='/search/:keyword' element={<Home /> }/>
               <Route path='/login' element={<LogIn /> }/>
               <Route path='/user/dashboard' element={<UserRoute><UserDashboardHOC /></UserRoute> } />
+              <Route path='/user/jobs' element={<UserRoute><UserJobsHisotryHOC /></UserRoute> } />
               <Route path='*' element={<NotFound /> }/>
             </Routes>
           </BrowserRouter>
