@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Box, useTheme } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import teamWorkImg from '../../images/teamwork.png'
-import { userLogoutAction } from '../../redux/actions/userAction';
+import { userLogoutAction, userProfileAction } from '../../redux/actions/userAction';
 
 const SidebarAdm = () => {
 
@@ -21,6 +21,10 @@ const SidebarAdm = () => {
     const { collapsed } = useProSidebar();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(userProfileAction());
+    }, []);
 
     const logout = () => {
         dispatch(userLogoutAction());

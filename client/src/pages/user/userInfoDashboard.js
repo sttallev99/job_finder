@@ -1,9 +1,12 @@
 import { useTheme } from '@emotion/react';
 import { Box, Card, CardContent, Typography } from '@mui/material'
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 const UserInfoDashboard = () => {
+    const { user } = useSelector(state => state.userProfile);
     const { palette } = useTheme();
+    console.log(user)
   return (
     <>
         <Box sx={{ maxWidth: '50%', margin: 'auto', pt: 10}}>
@@ -14,16 +17,16 @@ const UserInfoDashboard = () => {
                     </Typography>
                     <hr style={{ marginBottom: '30px'}} />
                     <Typography variant='h6' component='div' sx={{ color: '#fafafa'}}>
-                        First name: Georgi
+                        First name: {user && user.firstName}
                     </Typography>
                     <Typography variant='h6' component='div' sx={{ color: '#fafafa'}}>
-                        Last name: Stalev
+                        Last name: {user && user.lastName}
                     </Typography>
                     <Typography variant='h6' component='div' sx={{ color: '#fafafa'}}>
-                        E-mail: sttallev99@gmail.com
+                        E-mail: {user && user.email}
                     </Typography>
                     <Typography sx={{ mb: 1.5, color: 'gray', pt: 2}} color='text.secondary'>
-                        Status: regular user
+                        Status: {user && user.role === 0 ? 'Regular user' : 'Admin'}
                     </Typography>
                 </CardContent>
             </Card>
