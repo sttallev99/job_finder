@@ -26,11 +26,15 @@ const LogIn = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isAuthenticated } = useSelector(state => state.signIn);
+    const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
 
     useEffect(() => {
-        if (isAuthenticated) {
-            navigate('/user/dashboard');
+        if(isAuthenticated) {
+            if(userInfo.role === 1) {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/user/dashboard');
+            }
         }
     }, [isAuthenticated])
 
