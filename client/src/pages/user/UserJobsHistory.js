@@ -24,7 +24,7 @@ const UserJobsHistory = () => {
                             key={i}
                             id={history._id}
                             jobTitle={history.title}
-                            description=''
+                            description={history.description}
                             category=''
                             location={history.location}
                         />
