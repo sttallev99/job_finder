@@ -6,7 +6,6 @@ import CardElement from '../../components/CardElement';
 
 const UserJobsHistory = () => {
     const { user } = useSelector(state => state.userProfile);
-    console.log(user);
     const dispatch = useDispatch();
 
     useEffect(() => {

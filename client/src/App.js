@@ -13,12 +13,12 @@ import UserDashboard from './pages/user/UserDashboard';
 import UserRoute from './components/UserRoute';
 import Layout from './pages/global/Layout';
 import UserJobsHistory from './pages/user/UserJobsHistory';
-import userInfoDashboard from './pages/user/userInfoDashboard';
+import UserInfoDashboard from './pages/user/UserInfoDashboard';
 
 //HOC
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHisotryHOC = Layout(UserJobsHistory);
-const UserInfoDashboardHOC = Layout(userInfoDashboard);
+const UserInfoDashboardHOC = Layout(UserInfoDashboard);
 
 const App = () => {
 
