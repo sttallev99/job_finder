@@ -6,11 +6,11 @@ import SidebarAdm from './Sidebar';
 const Layout = (Component) => ({ ...props }) => {
     return (
         <>
-            <div style={{display: 'flex', minHeight: '100vh'}}>
+            <div style={{ display: 'flex', minHeight: "100vh" }}>
                 <SidebarAdm />
-                <Box sx={{ width: '100%', bgcolor: '#002952'}}>
+                <Box sx={{ width: "100%", bgcolor: "#002952" }}>
                     <HeaderTop />
-                    <Box sx={{ p:3}}>
+                    <Box sx={{ p: 3 }}>
                         <Component {...props} />
                     </Box>
                 </Box>

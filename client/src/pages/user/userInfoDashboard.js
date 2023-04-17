@@ -4,9 +4,10 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 
 const UserInfoDashboard = () => {
+    
     const { user } = useSelector(state => state.userProfile);
     const { palette } = useTheme();
-    console.log(user)
+
   return (
     <>
         <Box sx={{ maxWidth: '50%', margin: 'auto', pt: 10}}>
