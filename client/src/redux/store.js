@@ -4,7 +4,7 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 
 import { loadJobReducers, loadSingleJobReducer } from './reducers/jobReducer';
 import { loadJobTypeReducers } from './reducers/jobTypeReducer';
-import { userReducerLogout, userReducerProfile, userReducerSignIn } from './reducers/userReducer';
+import { userApplyJobReducer, userReducerLogout, userReducerProfile, userReducerSignIn } from './reducers/userReducer';
 
 //combine reducers
 const reducer = combineReducers({
@@ -13,7 +13,8 @@ const reducer = combineReducers({
     signIn: userReducerSignIn,
     logOut: userReducerLogout,
     userProfile: userReducerProfile,
-    singleJob: loadSingleJobReducer
+    singleJob: loadSingleJobReducer,
+    userJobApplication: userApplyJobReducer
 });
 
 //initial state

@@ -7,9 +7,7 @@ import Footer from '../components/Footer'
 import LoadingBox from '../components/LoadingBox'
 import Navbar from '../components/Navbar'
 import { jobLoadSingleAction } from '../redux/actions/jobAction'
-import Button from '@mui/material/Button'
-import { userApplyJobAction } from '../redux/actions/userAction'
-
+import Button from '@mui/material/Button';
 
 const SingleJob = () => {
     const dispatch = useDispatch();
@@ -60,11 +58,11 @@ const SingleJob = () => {
                                 }
                             </Box>
                             <Box sx={{ flex: 1, p: 2 }}>
-
+                                <Card sx={{ p: 2}}>
+                                    <Button sx={{ fontSize: '13px' }} variant='contained'>Applied for a Job</Button>
+                                </Card>
                             </Box>
-
                         </Stack>
-
                     </Container>
                 </Box>
                 <Footer />
