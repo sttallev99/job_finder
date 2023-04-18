@@ -2,6 +2,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import { 
+    ALL_USERS_LOAD_FAIL,
+    ALL_USERS_LOAD_REQUEST,
+    ALL_USERS_LOAD_SUCCESS,
     USER_APPLY_JOB_FAIL, 
     USER_APPLY_JOB_REQUEST, 
     USER_APPLY_JOB_SUCCESS, 
@@ -89,6 +92,24 @@ export const userApplyJobAction = (job) => async(dispatch) => {
     } catch(error) {
         dispatch({
             type: USER_APPLY_JOB_FAIL,
+            payload: error.response.data.error
+        });
+        toast.error(error.response.data.error);
+    }
+}
+
+export const allUsersAction = (job) => async(dispatch) => {
+    dispatch({ type: ALL_USERS_LOAD_REQUEST});
+    try {
+        const { data } = await axios.get(`/api/allUsers`);s
+        dispatch({
+            type: ALL_USERS_LOAD_SUCCESS,
+            payload: data
+        });
+        toast.success('Apply successfully for this job!');
+    } catch(error) {
+        dispatch({
+            type: ALL_USERS_LOAD_FAIL,
             payload: error.response.data.error
         });
         toast.error(error.response.data.error);

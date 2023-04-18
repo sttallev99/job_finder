@@ -1,4 +1,8 @@
 import { 
+    ALL_USERS_LOAD_FAIL,
+    ALL_USERS_LOAD_REQUEST,
+    ALL_USERS_LOAD_RESET,
+    ALL_USERS_LOAD_SUCCESS,
     USER_APPLY_JOB_FAIL, 
     USER_APPLY_JOB_REQUEST, 
     USER_APPLY_JOB_RESET, 
@@ -88,6 +92,25 @@ export const userApplyJobReducer = (state = {}, action) => {
         case USER_APPLY_JOB_FAIL:
             return { loading: false, error: action.payload }
         case USER_APPLY_JOB_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
+
+// all users reducer
+export const allUsersReducer = (state = [], action) => {
+    switch(action.type) {
+        case ALL_USERS_LOAD_REQUEST:
+            return { loading: true }
+        case ALL_USERS_LOAD_SUCCESS:
+            return {
+                loading: false,
+                userJob: action.payload.users,
+            }
+        case ALL_USERS_LOAD_FAIL:
+            return { loading: false, users: [], error: action.payload }
+        case ALL_USERS_LOAD_RESET:
             return {}
         default:
             return state;
