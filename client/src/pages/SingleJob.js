@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox'
 import Navbar from '../components/Navbar'
 import { jobLoadSingleAction } from '../redux/actions/jobAction'
 import Button from '@mui/material/Button';
+import { userApplyJobAction } from '../redux/actions/userAction'
 
 const SingleJob = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,15 @@ const SingleJob = () => {
     useEffect(() => {
         dispatch(jobLoadSingleAction(id));
     }, [id]);
+
+    const applyForAJob = () => {
+        dispatch(userApplyJobAction({
+            title: singleJob && singleJob.title,
+            description: singleJob && singleJob.description,
+            salary: singleJob && singleJob.salary,
+            location: singleJob && singleJob.location
+        }));
+    }
 
     return (
         <>
@@ -59,7 +69,7 @@ const SingleJob = () => {
                             </Box>
                             <Box sx={{ flex: 1, p: 2 }}>
                                 <Card sx={{ p: 2}}>
-                                    <Button sx={{ fontSize: '13px' }} variant='contained'>Applied for a Job</Button>
+                                    <Button onClick={applyForAJob} sx={{ fontSize: '13px' }} variant='contained'>Applied for a Job</Button>
                                 </Card>
                             </Box>
                         </Stack>
