@@ -98,20 +98,18 @@ export const userApplyJobAction = (job) => async(dispatch) => {
     }
 }
 
-export const allUsersAction = (job) => async(dispatch) => {
+export const allUsersAction = () => async(dispatch) => {
     dispatch({ type: ALL_USERS_LOAD_REQUEST});
     try {
-        const { data } = await axios.get(`/api/allUsers`);s
+        const { data } = await axios.get(`/api/allUsers`);
         dispatch({
             type: ALL_USERS_LOAD_SUCCESS,
             payload: data
         });
-        toast.success('Apply successfully for this job!');
     } catch(error) {
         dispatch({
             type: ALL_USERS_LOAD_FAIL,
             payload: error.response.data.error
         });
-        toast.error(error.response.data.error);
     }
 }

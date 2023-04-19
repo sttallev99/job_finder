@@ -99,14 +99,14 @@ export const userApplyJobReducer = (state = {}, action) => {
 }
 
 // all users reducer
-export const allUsersReducer = (state = [], action) => {
-    switch(action.type) {
+export const allUsersReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
         case ALL_USERS_LOAD_REQUEST:
-            return { loading: true }
+            return { loading: true, users: [] }
         case ALL_USERS_LOAD_SUCCESS:
             return {
                 loading: false,
-                userJob: action.payload.users,
+                users: action.payload.users,
             }
         case ALL_USERS_LOAD_FAIL:
             return { loading: false, users: [], error: action.payload }
@@ -115,4 +115,5 @@ export const allUsersReducer = (state = [], action) => {
         default:
             return state;
     }
+
 }
