@@ -183,7 +183,7 @@ const Navbar = () => {
                                         <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Sign In</Link></Typography>
                                     </MenuItem>
                                     <MenuItem onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Sign Up</Link></Typography>
+                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/register">Sign Up</Link></Typography>
                                     </MenuItem>
                                 </div>
                                  :

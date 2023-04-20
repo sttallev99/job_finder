@@ -20,6 +20,7 @@ import SingleJob from './pages/SingleJob';
 import UsersAdminDashboard from './pages/admin/UsersAdminDashboard';
 import JobsAdminDashboard from './pages/admin/JobsAdminDashboard';
 import CategAdminDashboard from './pages/admin/CategAdminDashboard';
+import SignUp from './pages/SignUp';
 
 //HOC
 const UserDashboardHOC = Layout(UserDashboard);
@@ -44,6 +45,7 @@ const App = () => {
               <Route path='/search/location/:location' element={<Home /> }/>
               <Route path='/search/:keyword' element={<Home /> }/>
               <Route path='/login' element={<LogIn /> }/>
+              <Route path='/register' element={<SignUp /> }/>
               <Route path='/job/:id' element={<SingleJob /> }/>
               <Route path='/admin/dashboard' element={<AdminRoute><AdminDashboardHOC /></AdminRoute>}/>
               <Route path='/admin/users' element={<AdminRoute><UsersAdminDashboardHOC /></AdminRoute>}/>

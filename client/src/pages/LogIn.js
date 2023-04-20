@@ -28,9 +28,6 @@ const LogIn = () => {
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
 
-    console.log(isAuthenticated);
-    console.log(userInfo);
-
     useEffect(() => {
         if(isAuthenticated) {
             if(userInfo.user.role === 1) {
@@ -48,7 +45,6 @@ const LogIn = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
-            console.log(values)
             dispatch(userSignInAction(values));
             actions.resetForm();
         }
