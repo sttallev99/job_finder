@@ -169,23 +169,40 @@ const Navbar = () => {
                             onClose={handleCloseUserMenu}
                         >
 
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            {/* <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
-                            </MenuItem>
+                            </MenuItem> */}
 
                             {
                                 !userInfo ?
-
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Log In</Link></Typography>
-                            </MenuItem>  :
-
-                            <MenuItem onClick={logout}>
-                                <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
-                            </MenuItem>
+                                <div>
+                                    <MenuItem onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Sign In</Link></Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleCloseUserMenu}>
+                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/login">Sign Up</Link></Typography>
+                                    </MenuItem>
+                                </div>
+                                 :
+                              
+                                <div>
+                                    {
+                                        userInfo.user.role !== 1 ?
+                                        <MenuItem onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
+                                        </MenuItem> :
+                                        <MenuItem onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.primary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
+                                        </MenuItem>
+                                    }
+                                    <MenuItem onClick={logout}>
+                                        <Typography style={{ textDecoration: "none", color: palette.primary.main }} textAlign="center">Log Out</Typography>
+                                    </MenuItem>
+                                </div>
+                                
 
                             }
 
