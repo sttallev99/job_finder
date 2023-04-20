@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
@@ -6,6 +6,9 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { userSignUpAction } from '../redux/actions/userAction';
 
 const validationSchema = yup.object({
     firstName: yup
@@ -18,24 +21,43 @@ const validationSchema = yup.object({
         .string('Enter your email')
         .email('Enter a valid email')
         .required('Email is required'),
-        password: yup
+    password: yup
         .string('Enter your password')
         .min(6, 'Password should be of minimum 6 characters length')
         .required('Password is required')
     });
 
 const SignUp = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { success } = useSelector(state => state.signUp);
+
+    // useEffect(() => {
+    //     if(isAuthenticated) {
+    //         if(userInfo.user.role === 1) {
+    //             navigate('/admin/dashboard');
+    //         } else {
+    //             navigate('/user/dashboard');
+    //         }
+    //     }
+    // }, [isAuthenticated])
+
 
     const formik = useFormik({
         initialValues: {
             firstName: '',
             lastName: '',
             email: '',
-            password: ''
+            password: '',
+            role: 0
+
         },
         validationSchema: validationSchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null ,2));
+        onSubmit: (values, actions) => {
+            dispatch(userSignUpAction(values));
+            actions.resetForm();
+            navigate('/login');
         }
     })
   return (
@@ -143,9 +165,16 @@ const SignUp = () => {
                         <RadioGroup
                             row
                             aria-labelledby="demo-row-radio-buttons-group-label"
-                            name="row-radio-buttons-group"
                         >
-                            <FormControlLabel value='1' control={<Radio />} label="Admin" />
+                            <FormControlLabel  
+                                control={<Radio />} 
+                                label="Admin"
+                                id='role'
+                                name="role"
+                                value= '1'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            />
                         </RadioGroup>
                     </FormControl>
 

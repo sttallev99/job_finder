@@ -16,15 +16,18 @@ import {
     USER_LOGOUT_SUCCESS, 
     USER_SIGNIN_FAIL, 
     USER_SIGNIN_REQUEST, 
-    USER_SIGNIN_SUCCESS 
+    USER_SIGNIN_SUCCESS, 
+    USER_SIGNUP_FAIL, 
+    USER_SIGNUP_REQUEST,
+    USER_SIGNUP_SUCCESS
 } from '../constants/jobConstants';
 
+//sign in action
 export const userSignInAction = (user) => async(dispatch) => {
     dispatch({ type: USER_SIGNIN_REQUEST});
     try {
         const { data } = await axios.post(`/api/signin`, user);
         localStorage.setItem('userInfo', JSON.stringify(data));
-        console.log(localStorage.getItem('userInfo'))
         dispatch({
             type: USER_SIGNIN_SUCCESS,
             payload: data
@@ -33,6 +36,24 @@ export const userSignInAction = (user) => async(dispatch) => {
     } catch(error) {
         dispatch({
             type: USER_SIGNIN_FAIL,
+            payload: error.response.data.error
+        });
+        toast.error(error.response.data.error);
+    }
+}
+
+//sign up action
+export const userSignUpAction = (user) => async(dispatch) => {
+    dispatch({ type: USER_SIGNUP_REQUEST});
+    try {
+        await axios.post(`/api/signup`, user);
+        dispatch({
+            type: USER_SIGNUP_SUCCESS
+        });
+        toast.success('Register Successfully!');
+    } catch(error) {
+        dispatch({
+            type: USER_SIGNUP_FAIL,
             payload: error.response.data.error
         });
         toast.error(error.response.data.error);
