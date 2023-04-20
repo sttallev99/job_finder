@@ -3,6 +3,10 @@ import {
     ALL_USERS_LOAD_REQUEST,
     ALL_USERS_LOAD_RESET,
     ALL_USERS_LOAD_SUCCESS,
+    DELETE_USER_LOAD_FAIL,
+    DELETE_USER_LOAD_REQUEST,
+    DELETE_USER_LOAD_RESET,
+    DELETE_USER_LOAD_SUCCESS,
     USER_APPLY_JOB_FAIL, 
     USER_APPLY_JOB_REQUEST, 
     USER_APPLY_JOB_RESET, 
@@ -118,7 +122,7 @@ export const userApplyJobReducer = (state = {}, action) => {
 }
 
 // all users reducer
-export const allUsersReducer = (state = { users: [] }, action) => {
+export const allUsersReducer = (state = {}, action) => {
     switch (action.type) {
         case ALL_USERS_LOAD_REQUEST:
             return { loading: true, users: [] }
@@ -134,5 +138,22 @@ export const allUsersReducer = (state = { users: [] }, action) => {
         default:
             return state;
     }
+}
 
+export const deleteUserReducer = (state = {}, action) => {
+    switch (action.type) {
+        case DELETE_USER_LOAD_REQUEST:
+            return { loading: true }
+        case DELETE_USER_LOAD_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload.users,
+            }
+        case DELETE_USER_LOAD_FAIL:
+            return { loading: false, error: action.payload }
+        case DELETE_USER_LOAD_RESET:
+            return {}
+        default:
+            return state;
+    }
 }

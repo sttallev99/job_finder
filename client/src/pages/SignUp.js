@@ -7,7 +7,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { userSignUpAction } from '../redux/actions/userAction';
 
 const validationSchema = yup.object({
@@ -30,19 +30,12 @@ const validationSchema = yup.object({
 const SignUp = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(location)
 
     const { success } = useSelector(state => state.signUp);
-
-    // useEffect(() => {
-    //     if(isAuthenticated) {
-    //         if(userInfo.user.role === 1) {
-    //             navigate('/admin/dashboard');
-    //         } else {
-    //             navigate('/user/dashboard');
-    //         }
-    //     }
-    // }, [isAuthenticated])
-
+    const userInfo = localStorage.getItem('userInfo');
 
     const formik = useFormik({
         initialValues: {
@@ -57,6 +50,9 @@ const SignUp = () => {
         onSubmit: (values, actions) => {
             dispatch(userSignUpAction(values));
             actions.resetForm();
+            if(userInfo) {
+                navigate(-1);
+            }
             navigate('/login');
         }
     })
@@ -177,8 +173,11 @@ const SignUp = () => {
                             />
                         </RadioGroup>
                     </FormControl>
-
-                    <Button fullWidth variant="contained" type='submit' >Sign Up</Button>
+                    {
+                        userInfo ? 
+                        <Button fullWidth variant="contained" type='submit' >Add user</Button> :
+                        <Button fullWidth variant="contained" type='submit' >Sign Up</Button>
+                    }
                 </Box>    
             </Box>
         </Box>

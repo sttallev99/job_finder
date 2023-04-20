@@ -134,3 +134,19 @@ export const allUsersAction = () => async(dispatch) => {
         });
     }
 }
+
+export const deleteUserAction = (id) => async(dispatch) => {
+    dispatch({ type: ALL_USERS_LOAD_REQUEST});
+    try {
+        const { data } = await axios.delete(`/api/admin/user/delete/${id}`);
+        dispatch({
+            type: ALL_USERS_LOAD_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: ALL_USERS_LOAD_FAIL,
+            payload: error.response.data.error
+        });
+    }
+}

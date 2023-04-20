@@ -47,6 +47,7 @@ exports.updateJob = async (req, res, next) => {
         next(eror);
     }
 }
+
 // get all jobs
 exports.showJobs = async (req, res, next) => {
 
@@ -100,4 +101,5 @@ exports.showJobs = async (req, res, next) => {
         next(eror);
     }
 }
+
 

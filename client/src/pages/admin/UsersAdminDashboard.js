@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Button, IconButton, Paper, Typography } from '@mui/material'
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
 
 import { allUsersAction } from '../../redux/actions/userAction';
+import { deleteUserAction } from '../../redux/actions/userAction';
 
 const UsersAdminDashboard = () => {
+
+    const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -17,7 +20,8 @@ const UsersAdminDashboard = () => {
     }, []);
 
     const deleteUserById = (e, id) => {
-        console.log(id);
+        dispatch(deleteUserAction(id))
+        dispatch(allUsersAction());
     }
 
 
@@ -63,7 +67,9 @@ const UsersAdminDashboard = () => {
           width: 200,
           renderCell: (values) => (
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "170px" }}>
-                  <Button variant="contained"><Link style={{ color: "white", textDecoration: "none" }} to={`/admin/edit/user/${values.row._id}`}>Edit</Link></ Button>
+                <Button variant="contained">
+                    <Link style={{ color: "white", textDecoration: "none" }} to={`/admin/edit/user/${values.row._id}`}>Edit</Link>
+                </ Button>
                   < Button onClick={(e) => deleteUserById(e, values.row._id)} variant="contained" color="error">Delete</ Button>
               </Box>
           )
@@ -78,7 +84,12 @@ const UsersAdminDashboard = () => {
             All users
         </Typography>
         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-            <Button variant='contained' color="success" startIcon={<AddIcon />}> Create user</Button>
+            <Button variant='contained' color="success" startIcon={<AddIcon />}>
+                <Link 
+                    style={{ color: "white", textDecoration: "none" }} 
+                    to={{pathname: '/register', state: { from: localStorage.pathname}}} 
+                >Create user</Link>
+            </Button>
         </Box>
             <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
