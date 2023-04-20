@@ -16,9 +16,12 @@ const UsersAdminDashboard = () => {
         dispatch(allUsersAction());
     }, []);
 
+    const deleteUserById = (e, id) => {
+        console.log(id);
+    }
+
 
     const { users, loading } = useSelector(state => state.allUsers);
-    console.log(users)
     let data = [];
     data = (users !== undefined && users.length > 0) ? users : []
 
@@ -61,7 +64,7 @@ const UsersAdminDashboard = () => {
           renderCell: (values) => (
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "170px" }}>
                   <Button variant="contained"><Link style={{ color: "white", textDecoration: "none" }} to={`/admin/edit/user/${values.row._id}`}>Edit</Link></ Button>
-                  < Button variant="contained" color="error">Delete</ Button>
+                  < Button onClick={(e) => deleteUserById(e, values.row._id)} variant="contained" color="error">Delete</ Button>
               </Box>
           )
       }

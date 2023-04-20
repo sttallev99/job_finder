@@ -86,7 +86,7 @@ exports.showJobs = async (req, res, next) => {
     console.log(count)
 
     try {
-        const jobs = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).sort({ createdAt: -1 }).skip(pageSize * (page - 1)).populate('jobType').limit(pageSize)
+        const jobs = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).sort({ createdAt: -1 }).skip(pageSize * (page - 1)).populate('jobType', 'jobTypeName').populate('user', 'firstName lastName').limit(pageSize)
         res.status(200).json({
             success: true,
             jobs,
