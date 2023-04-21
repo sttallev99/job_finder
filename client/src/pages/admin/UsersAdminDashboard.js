@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Button, IconButton, Paper, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Paper, TextField, Typography } from '@mui/material'
 import {Link, useLocation} from 'react-router-dom';
 import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
 
 import { allUsersAction } from '../../redux/actions/userAction';
 import { deleteUserAction } from '../../redux/actions/userAction';
+import EditUserFormDialog from '../../components/EditUserFormDialog';
 
 const UsersAdminDashboard = () => {
 
-    const location = useLocation();
+    const [open, setOpen] = useState(false);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(allUsersAction());
@@ -23,6 +24,15 @@ const UsersAdminDashboard = () => {
         dispatch(deleteUserAction(id))
         dispatch(allUsersAction());
     }
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = () => {
+        setOpen(false);
+    };
+    
 
 
     const { users, loading } = useSelector(state => state.allUsers);
@@ -67,10 +77,8 @@ const UsersAdminDashboard = () => {
           width: 200,
           renderCell: (values) => (
               <Box sx={{ display: "flex", justifyContent: "space-between", width: "170px" }}>
-                <Button variant="contained">
-                    <Link style={{ color: "white", textDecoration: "none" }} to={`/admin/edit/user/${values.row._id}`}>Edit</Link>
-                </ Button>
-                  < Button onClick={(e) => deleteUserById(e, values.row._id)} variant="contained" color="error">Delete</ Button>
+                    <EditUserFormDialog />
+                    < Button onClick={(e) => deleteUserById(e, values.row._id)} variant="contained" color="error">Delete</ Button>
               </Box>
           )
       }
