@@ -3,6 +3,10 @@ import {
     CREATE_JOB_TYPE_REQUEST, 
     CREATE_JOB_TYPE_RESET, 
     CREATE_JOB_TYPE_SUCCESS, 
+    DELETE_JOB_TYPE_FAIL, 
+    DELETE_JOB_TYPE_REQUEST, 
+    DELETE_JOB_TYPE_RESET, 
+    DELETE_JOB_TYPE_SUCCESS, 
     JOB_TYPE_LOAD_FAIL, 
     JOB_TYPE_LOAD_REQUEST, 
     JOB_TYPE_LOAD_RESET, 
@@ -45,6 +49,26 @@ export const createJobTypeReducers = (state={}, action) => {
             loading: false,
         }
         case CREATE_JOB_TYPE_RESET:
+        return {}
+        default:
+            return state;
+    }
+}
+
+// delete job type reducer
+export const deleteJobTypeReducers = (state={}, action) => {
+    switch (action.type) {
+        case DELETE_JOB_TYPE_REQUEST:
+            return { loading: true}
+        case DELETE_JOB_TYPE_SUCCESS:
+            return { 
+                loading: false,
+            }
+        case DELETE_JOB_TYPE_FAIL:
+        return { 
+            loading: false,
+        }
+        case DELETE_JOB_TYPE_RESET:
         return {}
         default:
             return state;

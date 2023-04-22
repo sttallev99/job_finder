@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { jobTypeLoadAction } from '../../redux/actions/jobTypeAction';
+import { deleteJobTypeAction, jobTypeLoadAction } from '../../redux/actions/jobTypeAction';
 import moment from 'moment';
 import { Box, Button, Paper, Typography, gridClasses } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,6 +19,11 @@ const CategAdminDashboard = () => {
     
     let data = [];
     data = (jobType !== undefined && jobType.length > 0) ? jobType : [];
+
+    const deleteJobTypeClickHandler = (e, id) => {
+        dispatch(deleteJobTypeAction(id));
+        dispatch(jobTypeLoadAction());
+    }
 
     const columns = [
         {
@@ -45,7 +50,9 @@ const CategAdminDashboard = () => {
             width: 200,
             renderCell: (values) => (
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '170px'}}>
-                    <Button variant='contained' color='error'>Delete</Button>
+                    <Button onClick={(e) => deleteJobTypeClickHandler(e, values.row._id)} variant='contained' color='error'>
+                        Delete
+                    </Button>
                 </Box>
             )
         }
