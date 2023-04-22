@@ -5,20 +5,20 @@ import moment from 'moment';
 import { Box, Button, Paper, Typography, gridClasses } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { DataGrid, GridToolbarExport } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
 
 const CategAdminDashboard = () => {
 
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(jobTypeLoadAction());
     }, []);
-
+    
     const { jobType, loading } = useSelector(state => state.jobTypeAll);
+    
     let data = [];
-
     data = (jobType !== undefined && jobType.length > 0) ? jobType : [];
-    console.log(data)
 
     const columns = [
         {
@@ -56,7 +56,9 @@ const CategAdminDashboard = () => {
         Jobs category
         </Typography>
         <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-        <Button variant='contained' color="success" startIcon={<AddIcon />}> Create Category</Button>
+        <Link to='/admin/category/create'>
+            <Button variant='contained' color="success" startIcon={<AddIcon />}> Create Category</Button>
+        </Link>
         </Box>
         <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
