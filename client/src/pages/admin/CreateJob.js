@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 import { jobTypeLoadAction } from '../../redux/actions/jobTypeAction'
 import { useTheme } from '@emotion/react';
+import { createJobAction } from '../../redux/actions/jobAction';
 
 const validationSchema = yup.object({
     title: yup
@@ -32,12 +33,14 @@ const CreateJob = () => {
     const [type, setType] = React.useState('');
     const { palette } = useTheme();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     useEffect(() => {
         dispatch(jobTypeLoadAction())
     }, []);
     
     const { jobType } =  useSelector(state => state.jobTypeAll);
+    const { userInfo } = useSelector(state => state.signIn);
 
     const handleChange = (event) => {
       setType(event.target.value);
@@ -48,13 +51,15 @@ const CreateJob = () => {
             title: '',
             description: '',
             salary: '',
-            location: '',
-            role: 0
+            location: ''
         },
         validationSchema: validationSchema,
         onSubmit: values => {
             values.jobType = type;
-            alert(JSON.stringify(values, null, 2));
+            values.user = userInfo.user._id;
+            console.log(values)
+            dispatch(createJobAction(values));
+            navigate('/admin/jobs');
         }
     })
   return (
@@ -130,7 +135,7 @@ const CreateJob = () => {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        placeholder="E-mail"
+                        placeholder="Salary"
                         value={formik.values.salary}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

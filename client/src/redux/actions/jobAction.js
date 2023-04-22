@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import { 
+    CREATE_JOB_FAIL,
+    CREATE_JOB_REQUEST,
+    CREATE_JOB_SUCCESS,
     JOB_LOAD_FAIL,
     JOB_LOAD_REQUEST,
     JOB_LOAD_SINGLE_FAIL,
@@ -38,6 +41,21 @@ export const jobLoadSingleAction = (id) => async(dispatch) => {
     } catch(error) {
         dispatch({
             type: JOB_LOAD_SINGLE_FAIL,
+            payload: error.response.data.error
+        });
+    }
+}
+//create job action
+export const createJobAction = (job) => async(dispatch) => {
+    dispatch({ type: CREATE_JOB_REQUEST});
+    try {
+        const { data } = await axios.post(`/api/job/create`, job);
+        dispatch({
+            type: CREATE_JOB_SUCCESS,
+        });
+    } catch(error) {
+        dispatch({
+            type: CREATE_JOB_FAIL,
             payload: error.response.data.error
         });
     }

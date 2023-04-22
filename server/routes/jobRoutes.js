@@ -7,7 +7,7 @@ const { createJob, singleJob, updateJob, showJobs } = require('../controllers/jo
 
 
 //user routes
-// /api/jobs/create
+// /api/job/create
 router.post('/job/create', isAuthenticated, isAdmin, createJob);
 // /api/job/id
 router.get('/job/:id', singleJob);
