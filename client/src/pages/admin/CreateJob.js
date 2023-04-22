@@ -14,20 +14,18 @@ import { jobTypeLoadAction } from '../../redux/actions/jobTypeAction'
 import { useTheme } from '@emotion/react';
 
 const validationSchema = yup.object({
-    firstName: yup
-        .string('Enter your first name')
-        .required('First name is required'),
-    lastName: yup
-        .string('Enter your Last name')
-        .required('Last name is required'),
-    email: yup
-        .string('Enter your email')
-        .email('Enter a valid email')
-        .required('Email is required'),
-    password: yup
-        .string('Enter your password')
-        .min(6, 'Password should be of minimum 6 characters length')
-        .required('Password is required')
+    title: yup
+        .string('Enter job title')
+        .required('Job title is required'),
+    description: yup
+        .string('Enter job description')
+        .required('Job is required'),
+    salary: yup
+        .string('Enter job salary')
+        .required('Job salary is required'),
+    location: yup
+        .string('Enter job location')
+        .required('Job location is required')
     });
 
 const CreateJob = () => {
@@ -53,6 +51,7 @@ const CreateJob = () => {
             location: '',
             role: 0
         },
+        validationSchema: validationSchema,
         onSubmit: values => {
             values.jobType = type;
             alert(JSON.stringify(values, null, 2));
