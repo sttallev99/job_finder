@@ -21,7 +21,6 @@ const UsersAdminDashboard = () => {
         dispatch(allUsersAction());
     }
     
-
     const { users, loading } = useSelector(state => state.allUsers);
     let data = [];
     data = (users !== undefined && users.length > 0) ? users : []

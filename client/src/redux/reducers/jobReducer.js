@@ -3,6 +3,10 @@ import {
     CREATE_JOB_REQUEST, 
     CREATE_JOB_RESET, 
     CREATE_JOB_SUCCESS, 
+    DELETE_JOB_FAIL, 
+    DELETE_JOB_REQUEST, 
+    DELETE_JOB_RESET, 
+    DELETE_JOB_SUCCESS, 
     JOB_LOAD_FAIL, 
     JOB_LOAD_REQUEST, 
     JOB_LOAD_RESET, 
@@ -77,6 +81,27 @@ export const createJobReducer = (state = {}, action) => {
                 error: action.payload 
             }
         case CREATE_JOB_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
+
+//delete job reducer
+export const deleteJobReducer = (state = {}, action) => {
+    switch(action.type) {
+        case DELETE_JOB_REQUEST:
+            return { loading: true }
+        case DELETE_JOB_SUCCESS:
+            return {
+                loading: false
+            }
+        case DELETE_JOB_FAIL:
+            return { 
+                loading: false,
+                error: action.payload 
+            }
+        case DELETE_JOB_RESET:
             return {}
         default:
             return state;

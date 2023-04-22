@@ -6,6 +6,7 @@ import { createJobReducer, loadJobReducers, loadSingleJobReducer } from './reduc
 import { loadJobTypeReducers } from './reducers/jobTypeReducer';
 import { allUsersReducer, signleUserReducer, userApplyJobReducer, userReducerLogout, userReducerProfile, userReducerSignIn } from './reducers/userReducer';
 import { deleteUserAction, singleUserAction, userSignUpAction } from './actions/userAction';
+import { deleteJobAction } from './actions/jobAction';
 
 //combine reducers
 const reducer = combineReducers({
@@ -17,6 +18,7 @@ const reducer = combineReducers({
     userProfile: userReducerProfile,
     singleJob: loadSingleJobReducer,
     createJob: createJobReducer,
+    deleteJob: deleteJobAction,
     userJobApplication: userApplyJobReducer,
     allUsers: allUsersReducer,
     singleUser: signleUserReducer,

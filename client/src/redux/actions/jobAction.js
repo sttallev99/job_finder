@@ -4,6 +4,9 @@ import {
     CREATE_JOB_FAIL,
     CREATE_JOB_REQUEST,
     CREATE_JOB_SUCCESS,
+    DELETE_JOB_FAIL,
+    DELETE_JOB_REQUEST,
+    DELETE_JOB_SUCCESS,
     JOB_LOAD_FAIL,
     JOB_LOAD_REQUEST,
     JOB_LOAD_SINGLE_FAIL,
@@ -56,6 +59,23 @@ export const createJobAction = (job) => async(dispatch) => {
     } catch(error) {
         dispatch({
             type: CREATE_JOB_FAIL,
+            payload: error.response.data.error
+        });
+    }
+
+}
+
+//delete job action
+export const deleteJobAction = (id) => async(dispatch) => {
+    dispatch({ type: DELETE_JOB_REQUEST });
+    try {
+        const { data } = await axios.delete(`/api/job/delete/${id}`);
+        dispatch({
+            type: DELETE_JOB_SUCCESS,
+        });
+    } catch(error) {
+        dispatch({
+            type: DELETE_JOB_FAIL,
             payload: error.response.data.error
         });
     }

@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { jobLoadAction } from '../../redux/actions/jobAction';
+import { Link, useNavigate } from 'react-router-dom'
+import { deleteJobAction, jobLoadAction } from '../../redux/actions/jobAction';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 
 const JobsAdminDashboard = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(jobLoadAction())
@@ -17,6 +18,11 @@ const JobsAdminDashboard = () => {
     const { jobs, loading } = useSelector(state => state.loadJob);
     let data = [];
     data = (jobs !== undefined && jobs.length > 0) ? jobs : [];
+
+    const deleteJobClickHandler = (e, id) => {
+        dispatch(deleteJobAction(id));
+        dispatch(jobLoadAction())
+    }
 
     const columns = [
         {
@@ -64,7 +70,7 @@ const JobsAdminDashboard = () => {
             width: 200,
             renderCell: (values) => (
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '170px'}}>
-                    <Button variant='contained' color='error'>Delete</Button>
+                    <Button onClick={(e) => deleteJobClickHandler(e, values.row._id)} variant='contained' color='error'>Delete</Button>
                 </Box>
             )
         }
