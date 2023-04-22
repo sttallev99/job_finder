@@ -12,7 +12,9 @@ const JobsAdminDashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(jobLoadAction())
+        setInterval(() => {
+            dispatch(jobLoadAction());
+        }, 500)
     }, []);
 
     const { jobs, loading } = useSelector(state => state.loadJob);
