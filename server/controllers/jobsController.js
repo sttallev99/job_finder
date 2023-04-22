@@ -35,6 +35,19 @@ exports.singleJob = async (req, res, next) => {
     }
 }
 
+//delete job
+exports.deleteJob = async (req, res, next) => {
+    try {
+        const id = req.params.job_id;
+        await Job.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true
+        })
+    } catch(error) {
+        next(error);
+    }
+}
+
 //update job by id
 exports.updateJob = async (req, res, next) => {
     try {
