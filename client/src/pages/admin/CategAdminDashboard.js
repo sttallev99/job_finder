@@ -4,7 +4,6 @@ import { jobTypeLoadAction } from '../../redux/actions/jobTypeAction';
 import moment from 'moment';
 import { Box, Button, Paper, Typography, gridClasses } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom';
 import { DataGrid, GridToolbarExport } from '@mui/x-data-grid';
 
 const CategAdminDashboard = () => {
@@ -46,9 +45,6 @@ const CategAdminDashboard = () => {
             width: 200,
             renderCell: (values) => (
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '170px'}}>
-                    <Button variant='contained'>
-                        <Link style={{ color: 'white', textDecoration: 'none' }} to={`/admin/edit/jobtype/${values.row._id}`}>Edit</Link>
-                    </Button>
                     <Button variant='contained' color='error'>Delete</Button>
                 </Box>
             )

@@ -64,9 +64,6 @@ const JobsAdminDashboard = () => {
             width: 200,
             renderCell: (values) => (
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '170px'}}>
-                    <Button variant='contained'>
-                        <Link style={{ color: 'white', textDecoration: 'none'}} to={`/admin/edit/job/${values.row._id}`}>Edit</Link>
-                    </Button>
                     <Button variant='contained' color='error'>Delete</Button>
                 </Box>
             )
@@ -79,7 +76,9 @@ const JobsAdminDashboard = () => {
               Jobs list
           </Typography>
           <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-              <Button variant='contained' color="success" startIcon={<AddIcon />}> <Link style={{ color: "white", textDecoration: "none" }} to="/admin/job/create">Create Job</Link></Button>
+                <Button variant='contained' color="success" startIcon={<AddIcon />}> 
+                    <Link style={{ color: "white", textDecoration: "none" }} to="/admin/job/create">Create Job</Link>
+                </Button>
           </Box>
           <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 

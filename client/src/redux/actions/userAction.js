@@ -5,6 +5,9 @@ import {
     ALL_USERS_LOAD_FAIL,
     ALL_USERS_LOAD_REQUEST,
     ALL_USERS_LOAD_SUCCESS,
+    SINGLE_USER_LOAD_FAIL,
+    SINGLE_USER_LOAD_REQUEST,
+    SINGLE_USER_LOAD_SUCCESS,
     USER_APPLY_JOB_FAIL, 
     USER_APPLY_JOB_REQUEST, 
     USER_APPLY_JOB_SUCCESS, 
@@ -119,6 +122,7 @@ export const userApplyJobAction = (job) => async(dispatch) => {
     }
 }
 
+//all users action
 export const allUsersAction = () => async(dispatch) => {
     dispatch({ type: ALL_USERS_LOAD_REQUEST});
     try {
@@ -135,6 +139,7 @@ export const allUsersAction = () => async(dispatch) => {
     }
 }
 
+//delete user action
 export const deleteUserAction = (id) => async(dispatch) => {
     dispatch({ type: ALL_USERS_LOAD_REQUEST});
     try {
@@ -146,6 +151,23 @@ export const deleteUserAction = (id) => async(dispatch) => {
     } catch(error) {
         dispatch({
             type: ALL_USERS_LOAD_FAIL,
+            payload: error.response.data.error
+        });
+    }
+}
+
+//single user action
+export const singleUserAction = (id) => async(dispatch) => {
+    dispatch({ type: SINGLE_USER_LOAD_REQUEST});
+    try {
+        const { data } = await axios.get(`/api/user/${id}`);
+        dispatch({
+            type: SINGLE_USER_LOAD_SUCCESS,
+            payload: data
+        });
+    } catch(error) {
+        dispatch({
+            type: SINGLE_USER_LOAD_FAIL,
             payload: error.response.data.error
         });
     }

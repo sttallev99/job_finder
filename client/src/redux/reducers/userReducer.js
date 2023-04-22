@@ -7,6 +7,10 @@ import {
     DELETE_USER_LOAD_REQUEST,
     DELETE_USER_LOAD_RESET,
     DELETE_USER_LOAD_SUCCESS,
+    SINGLE_USER_LOAD_FAIL,
+    SINGLE_USER_LOAD_REQUEST,
+    SINGLE_USER_LOAD_RESET,
+    SINGLE_USER_LOAD_SUCCESS,
     USER_APPLY_JOB_FAIL, 
     USER_APPLY_JOB_REQUEST, 
     USER_APPLY_JOB_RESET, 
@@ -29,7 +33,7 @@ import {
     USER_SIGNUP_SUCCESS
 } from "../constants/jobConstants"
 
-
+//sign in user reducer
 export const userReducerSignIn = (state = {}, action) => {
     switch(action.type) {
         case USER_SIGNIN_REQUEST:
@@ -49,6 +53,7 @@ export const userReducerSignIn = (state = {}, action) => {
     }
 }
 
+// sign up user reducer
 export const userReducerSignUp = (state = {}, action) => {
     switch(action.type) {
         case USER_SIGNUP_REQUEST:
@@ -140,6 +145,7 @@ export const allUsersReducer = (state = {}, action) => {
     }
 }
 
+//delete user reducer
 export const deleteUserReducer = (state = {}, action) => {
     switch (action.type) {
         case DELETE_USER_LOAD_REQUEST:
@@ -152,6 +158,25 @@ export const deleteUserReducer = (state = {}, action) => {
         case DELETE_USER_LOAD_FAIL:
             return { loading: false, error: action.payload }
         case DELETE_USER_LOAD_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
+
+//get user reducer
+export const signleUserReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SINGLE_USER_LOAD_REQUEST:
+            return { loading: true, user: {} }
+        case SINGLE_USER_LOAD_SUCCESS:
+            return {
+                loading: false,
+                user: action.payload.user,
+            }
+        case SINGLE_USER_LOAD_FAIL:
+            return { loading: false, user: {}, error: action.payload }
+        case SINGLE_USER_LOAD_RESET:
             return {}
         default:
             return state;

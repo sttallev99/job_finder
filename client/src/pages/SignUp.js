@@ -30,9 +30,6 @@ const validationSchema = yup.object({
 const SignUp = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
-
-    console.log(location)
 
     const { success } = useSelector(state => state.signUp);
     const userInfo = localStorage.getItem('userInfo');
