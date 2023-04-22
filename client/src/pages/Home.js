@@ -17,7 +17,6 @@ import { jobTypeLoadAction } from '../redux/actions/jobTypeAction';
 
 const Home = () => {
   const { jobs, setUniqueLocation, pages, loading} = useSelector(state => state.loadJob);
-  console.log(jobs);
   
   const {palette} = useTheme();
   const dispatch = useDispatch();

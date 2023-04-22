@@ -22,7 +22,6 @@ const SelectComponent = ({ handleChangeCategory, cat}) => {
                     <MenuItem value=''>All</MenuItem>
                     {
                         jobType && jobType.map(jt => {
-                            console.log(jt)
                             return <MenuItem key={jt._id} value={jt._id}>{jt.jobTypeName}</MenuItem>
                         }
                         )
