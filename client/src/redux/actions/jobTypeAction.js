@@ -1,5 +1,17 @@
 import axios from 'axios';
-import { CREATE_JOB_TYPE_FAIL, CREATE_JOB_TYPE_REQUEST, CREATE_JOB_TYPE_SUCCESS, DELETE_JOB_TYPE_FAIL, DELETE_JOB_TYPE_REQUEST, DELETE_JOB_TYPE_SUCCESS, JOB_TYPE_LOAD_FAIL, JOB_TYPE_LOAD_REQUEST, JOB_TYPE_LOAD_SUCCESS } from '../constants/jobConstants';
+import { toast } from 'react-toastify';
+
+import { 
+    CREATE_JOB_TYPE_FAIL, 
+    CREATE_JOB_TYPE_REQUEST, 
+    CREATE_JOB_TYPE_SUCCESS, 
+    DELETE_JOB_TYPE_FAIL, 
+    DELETE_JOB_TYPE_REQUEST, 
+    DELETE_JOB_TYPE_SUCCESS, 
+    JOB_TYPE_LOAD_FAIL, 
+    JOB_TYPE_LOAD_REQUEST, 
+    JOB_TYPE_LOAD_SUCCESS 
+} from '../constants/jobConstants';
 
 export const jobTypeLoadAction = () => async(dispatch) => {
     dispatch({ type: JOB_TYPE_LOAD_REQUEST});
@@ -26,6 +38,7 @@ export const createJobTypeAction = (jobType) => async(dispatch) => {
         dispatch({
             type: CREATE_JOB_TYPE_SUCCESS
         });
+        toast.success('Job type created successfully')
     } catch(error) {
         dispatch({
             type: CREATE_JOB_TYPE_FAIL,

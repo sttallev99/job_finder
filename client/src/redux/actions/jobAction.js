@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import { 
     CREATE_JOB_FAIL,
@@ -56,6 +57,7 @@ export const createJobAction = (job) => async(dispatch) => {
         dispatch({
             type: CREATE_JOB_SUCCESS,
         });
+        toast.success('Job created successfully')
     } catch(error) {
         dispatch({
             type: CREATE_JOB_FAIL,
