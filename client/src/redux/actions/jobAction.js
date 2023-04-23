@@ -75,6 +75,7 @@ export const deleteJobAction = (id) => async(dispatch) => {
         dispatch({
             type: DELETE_JOB_SUCCESS,
         });
+        toast.success('Delete job successfully')
     } catch(error) {
         dispatch({
             type: DELETE_JOB_FAIL,

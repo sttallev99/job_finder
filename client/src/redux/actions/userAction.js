@@ -148,6 +148,7 @@ export const deleteUserAction = (id) => async(dispatch) => {
             type: ALL_USERS_LOAD_SUCCESS,
             payload: data
         });
+        toast.success('Delete user successfully')
     } catch(error) {
         dispatch({
             type: ALL_USERS_LOAD_FAIL,
