@@ -10,6 +10,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Sidebar, useProSidebar, Menu, menuClasses, MenuItem } from 'react-pro-sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import teamWorkImg from '../../images/teamwork.png'
 import { userLogoutAction, userProfileAction } from '../../redux/actions/userAction';
@@ -110,6 +111,9 @@ const SidebarAdm = () => {
                             }
                         }}
                     >
+                        <MenuItem icon={<ArrowBackIcon />}>
+                            <Link style={{ color: "white", textDecoration: "none" }} to='/'>back to home</Link>
+                        </MenuItem>
                         <MenuItem onClick={logout} icon={<LoginIcon />}>Log out</MenuItem>
                     </Menu>
                 </Box>
