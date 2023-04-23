@@ -6,13 +6,16 @@ import { Box, Button, Paper, Typography, gridClasses } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { DataGrid, GridToolbarExport } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
+import LoadingBox from '../../components/LoadingBox';
 
 const CategAdminDashboard = () => {
 
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(jobTypeLoadAction());
+        setTimeout(() => {
+            dispatch(jobTypeLoadAction());
+        },500)
     }, []);
     
     const { jobType, loading } = useSelector(state => state.jobTypeAll);
@@ -22,7 +25,9 @@ const CategAdminDashboard = () => {
 
     const deleteJobTypeClickHandler = (e, id) => {
         dispatch(deleteJobTypeAction(id));
-        dispatch(jobTypeLoadAction());
+        setTimeout(() => {
+            dispatch(jobTypeLoadAction());
+        },500)
     }
 
     const columns = [
@@ -57,7 +62,7 @@ const CategAdminDashboard = () => {
             )
         }
     ]
-  return (  
+  return (
     <Box >
         <Typography variant="h4" sx={{ color: "white", pb: 3 }}>
         Jobs category
@@ -70,31 +75,47 @@ const CategAdminDashboard = () => {
         <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
         <Box sx={{ height: 400, width: '100%' }}>
-        <DataGrid
-            getRowId={(row) => row._id}
-            sx={{
-
-                '& .MuiTablePagination-displayedRows': {
-                    color: 'white',
-                },
-                color: 'white',
-                [`& .${gridClasses.row}`]: {
-                    bgcolor: (theme) =>
-                        // theme.palette.mode === 'light' ? grey[200] : grey[900],
-                        theme.palette.secondary.main
-                },
-                button: {
-                    color: '#ffffff'
-                }
-
-            }}
-            rows={data}
-            columns={columns}
-            pageSize={3}
-            rowsPerPageOptions={[3]}
-            checkboxSelection
-            components={{ Toolbar: GridToolbarExport }}
-        />
+            {
+                loading ? 
+                <LoadingBox /> :
+                jobType && jobType.length === 0 ?
+                    <>
+                    <Box
+                        sx={{
+                            minHeight: '500px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                        <h2>No results found!</h2>
+                    </Box>
+                    </> :
+                    <DataGrid
+                        getRowId={(row) => row._id}
+                        sx={{
+            
+                            '& .MuiTablePagination-displayedRows': {
+                                color: 'white',
+                            },
+                            color: 'white',
+                            [`& .${gridClasses.row}`]: {
+                                bgcolor: (theme) =>
+                                    // theme.palette.mode === 'light' ? grey[200] : grey[900],
+                                    theme.palette.secondary.main
+                            },
+                            button: {
+                                color: '#ffffff'
+                            }
+            
+                        }}
+                        rows={data}
+                        columns={columns}
+                        pageSize={3}
+                        rowsPerPageOptions={[3]}
+                        checkboxSelection
+                        components={{ Toolbar: GridToolbarExport }}
+                    />
+            }
         </Box>
         </Paper>
 

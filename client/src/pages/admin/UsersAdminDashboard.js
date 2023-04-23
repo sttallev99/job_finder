@@ -8,6 +8,7 @@ import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
 
 import { allUsersAction } from '../../redux/actions/userAction';
 import { deleteUserAction } from '../../redux/actions/userAction';
+import LoadingBox from '../../components/LoadingBox';
 
 const UsersAdminDashboard = () => {
     const dispatch = useDispatch();
@@ -87,31 +88,45 @@ const UsersAdminDashboard = () => {
             <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
                 <Box sx={{ height: 400, width: '100%' }}>
-                    <DataGrid
-                        sx={{
+                    {
+                        loading ?
+                        <LoadingBox /> :
+                        users && users.length === 0 ?
+                        <Box
+                            sx={{
+                                minHeight: '500px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                            <h2>No results found!</h2>
+                        </Box> :
+                        <DataGrid
+                            sx={{
 
-                            '& .MuiTablePagination-displayedRows': {
+                                '& .MuiTablePagination-displayedRows': {
+                                    color: 'white',
+                                },
                                 color: 'white',
-                            },
-                            color: 'white',
-                            [`& .${gridClasses.row}`]: {
-                                bgcolor: (theme) =>
-                                    // theme.palette.mode === 'light' ? grey[200] : grey[900],
-                                    theme.palette.secondary.main
-                            },
-                            button: {
-                                color: '#ffffff'
-                            }
+                                [`& .${gridClasses.row}`]: {
+                                    bgcolor: (theme) =>
+                                        // theme.palette.mode === 'light' ? grey[200] : grey[900],
+                                        theme.palette.secondary.main
+                                },
+                                button: {
+                                    color: '#ffffff'
+                                }
 
-                        }}
-                        getRowId={(row) => row._id}
-                        rows={data}
-                        columns={columns}
-                        pageSize={3}
-                        rowsPerPageOptions={[3]}
-                        checkboxSelection
-                        slots={{ toolbar: GridToolbar }}
-                    />
+                            }}
+                            getRowId={(row) => row._id}
+                            rows={data}
+                            columns={columns}
+                            pageSize={3}
+                            rowsPerPageOptions={[3]}
+                            checkboxSelection
+                            slots={{ toolbar: GridToolbar }}
+                        />
+                    }
                 </Box>
             </Paper>
         </Box>

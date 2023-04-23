@@ -2,19 +2,17 @@ import React, { useEffect } from 'react'
 import { Box, Button, Paper, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { deleteJobAction, jobLoadAction } from '../../redux/actions/jobAction';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
+import LoadingBox from '../../components/LoadingBox';
 
 const JobsAdminDashboard = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
-        setInterval(() => {
-            dispatch(jobLoadAction());
-        }, 500)
+        dispatch(jobLoadAction());
     }, []);
 
     const { jobs, loading } = useSelector(state => state.loadJob);
@@ -91,30 +89,44 @@ const JobsAdminDashboard = () => {
           <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
               <Box sx={{ height: 400, width: '100%' }}>
-                  <DataGrid
-                      getRowId={(row) => row._id}
-                      sx={{
+                {
+                    loading ? 
+                    <LoadingBox /> :
+                    jobs && jobs.length === 0 ?
+                    <Box
+                        sx={{
+                            minHeight: '500px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                        <h2>No results found!</h2>
+                    </Box> :
+                    <DataGrid
+                        getRowId={(row) => row._id}
+                        sx={{
 
-                          '& .MuiTablePagination-displayedRows': {
-                              color: 'white',
-                          },
-                          color: 'white',
-                          [`& .${gridClasses.row}`]: {
-                              bgcolor: (theme) =>
-                                  // theme.palette.mode === 'light' ? grey[200] : grey[900],
-                                  theme.palette.secondary.main
-                          },
-                          button: {
-                              color: '#ffffff'
-                          }
+                            '& .MuiTablePagination-displayedRows': {
+                                color: 'white',
+                            },
+                            color: 'white',
+                            [`& .${gridClasses.row}`]: {
+                                bgcolor: (theme) =>
+                                    // theme.palette.mode === 'light' ? grey[200] : grey[900],
+                                    theme.palette.secondary.main
+                            },
+                            button: {
+                                color: '#ffffff'
+                            }
 
-                      }}
-                      rows={data}
-                      columns={columns}
-                      pageSize={5}
-                      rowsPerPageOptions={[5]}
-                      checkboxSelection
-                  />
+                        }}
+                        rows={data}
+                        columns={columns}
+                        pageSize={5}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                    />
+                }
               </Box>
           </Paper>
       </Box>
