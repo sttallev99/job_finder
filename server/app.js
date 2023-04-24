@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(cors({
-    origin: "https://jobsfinder-app.netlify.app",
+    origin: ["https://jobs-finder-server.herokuapp.com", "https://jobsfinder-app.netlify.app/"],
     credentials: true,
     allowedHeaders: [
       "Content-Type",
