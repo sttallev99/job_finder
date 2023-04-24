@@ -57,7 +57,6 @@ const CreateJob = () => {
         onSubmit: values => {
             values.jobType = type;
             values.user = userInfo.user._id;
-            console.log(values)
             dispatch(createJobAction(values));
             navigate('/admin/jobs');
         }

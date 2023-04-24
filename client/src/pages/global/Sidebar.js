@@ -29,10 +29,10 @@ const SidebarAdm = () => {
 
     const logout = () => {
         dispatch(userLogoutAction());
-        window.location.reload(true);
         setTimeout(() => {
+            window.location.reload(true);
             navigate('/');
-        }, 500)
+        }, 500);
     }
 
   return (

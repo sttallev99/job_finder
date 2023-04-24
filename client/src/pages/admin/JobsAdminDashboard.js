@@ -12,7 +12,9 @@ const JobsAdminDashboard = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(jobLoadAction());
+        setTimeout(() => {
+            dispatch(jobLoadAction());
+        }, 700)
     }, []);
 
     const { jobs, loading } = useSelector(state => state.loadJob);
@@ -21,7 +23,9 @@ const JobsAdminDashboard = () => {
 
     const deleteJobClickHandler = (e, id) => {
         dispatch(deleteJobAction(id));
-        dispatch(jobLoadAction())
+        setTimeout(() => {
+            dispatch(jobLoadAction())
+        }, 400);
     }
 
     const columns = [

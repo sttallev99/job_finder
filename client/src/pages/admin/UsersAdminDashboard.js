@@ -14,12 +14,16 @@ const UsersAdminDashboard = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(allUsersAction());
+        setTimeout(() => {
+            dispatch(allUsersAction());
+        }, 700);
     }, []);
 
     const deleteUserById = (e, id) => {
-        dispatch(deleteUserAction(id))
-        dispatch(allUsersAction());
+        dispatch(deleteUserAction(id));
+        setTimeout(() => {
+            dispatch(allUsersAction());
+        }, 400)
     }
     
     const { users, loading } = useSelector(state => state.allUsers);

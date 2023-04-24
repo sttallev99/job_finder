@@ -13,6 +13,8 @@ import {
     JOB_TYPE_LOAD_SUCCESS 
 } from '../constants/jobConstants';
 
+axios.defaults.withCredentials = true;
+
 export const jobTypeLoadAction = () => async(dispatch) => {
     dispatch({ type: JOB_TYPE_LOAD_REQUEST});
     try {

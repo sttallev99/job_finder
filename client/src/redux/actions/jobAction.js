@@ -14,8 +14,9 @@ import {
     JOB_LOAD_SINGLE_REQUEST, 
     JOB_LOAD_SINGLE_SUCCESS, 
     JOB_LOAD_SUCCESS 
-    } from "../constants/jobConstants"
+} from "../constants/jobConstants"
 
+axios.defaults.withCredentials = true;
 
 export const jobLoadAction = (pageNumber, keyword='', cat='', location='') => async(dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST});

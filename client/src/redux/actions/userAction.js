@@ -25,8 +25,12 @@ import {
     USER_SIGNUP_SUCCESS
 } from '../constants/jobConstants';
 
+axios.defaults.withCredentials = true;
+
 //sign in action
 export const userSignInAction = (user) => async(dispatch) => {
+
+
     dispatch({ type: USER_SIGNIN_REQUEST});
     try {
         const { data } = await axios.post(`https://jobsfinder-api.onrender.com/api/signin`, user);
@@ -70,6 +74,7 @@ export const userLogoutAction = () => async(dispatch) => {
     try {
         const { data } = await axios.get('https://jobsfinder-api.onrender.com/api/logout');
         localStorage.removeItem('userInfo');
+        document.cookie = '';
         dispatch({
             type: USER_LOGOUT_SUCCESS,
             payload: data
@@ -89,7 +94,7 @@ export const userLogoutAction = () => async(dispatch) => {
 export const userProfileAction = () => async(dispatch) => {
     dispatch({ type: USER_LOAD_REQUEST});
     try {
-        const { data } = await axios.get('https://jobsfinder-api.onrender.com/api/me', { withCredentials: true })
+        const { data } = await axios.get('https://jobsfinder-api.onrender.com/api/me')
         dispatch({
             type: USER_LOAD_SUCCESS,
             payload: data
