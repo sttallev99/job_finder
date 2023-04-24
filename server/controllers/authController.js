@@ -53,9 +53,9 @@ const sendTokenResponse = async (user, codeStatus, res) => {
             { 
                 maxAge: 60 * 60 * 1000, 
                 httpOnly: true,
-                sameSite: 'none',
+                sameSite: "none",
                 secure: true,
-                domain: 'jobsfinder-app.netlify.app'
+                // domain: 'jobsfinder-app.netlify.app'
             })
         .json({ success: true, token, user });
 }
