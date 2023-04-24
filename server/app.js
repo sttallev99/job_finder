@@ -31,7 +31,18 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: "https://jobs-finder-server.herokuapp.com/",
+    credentials: true,
+    allowedHeaders: [
+      "Content-Type",
+      "Accept",
+      "Origin",
+      "X-Requested-With",
+      "Authorization",
+      "Set-Cookie",
+    ],
+}));
 
 //ROUTES MIDDLEWARE
 app.use('/api', authRoutes);
