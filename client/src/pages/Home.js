@@ -27,7 +27,7 @@ const Home = () => {
   const [cat, setCat] = useState('');
 
   useEffect(() => {
-    useEffect(() => {
+    setTimeout(() => {
       dispatch(jobLoadAction(page, keyword, cat, location));
     }, 300)
   }, [page, keyword, cat, location]);
