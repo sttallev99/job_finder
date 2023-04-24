@@ -49,8 +49,15 @@ exports.signup = async (req, res, next) => {
 const sendTokenResponse = async (user, codeStatus, res) => {
     const token = await user.getJwtToken();
     res.status(codeStatus)
-        .cookie('token', token, { maxAge: 60 * 60 * 1000, httpOnly: true })
-        .json({ success: true, token, user })
+        .cookie('token', token, 
+            { 
+                maxAge: 60 * 60 * 1000, 
+                httpOnly: true,
+                sameSite: 'none',
+                secure: true,
+                domain: 'jobsfinder-app.netlify.app'
+            })
+        .json({ success: true, token, user });
 }
 
 // user profile
