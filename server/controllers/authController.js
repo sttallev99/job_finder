@@ -55,7 +55,7 @@ const sendTokenResponse = async (user, codeStatus, res) => {
                 httpOnly: true,
                 sameSite: "none",
                 secure: true,
-                // domain: 'jobsfinder-app.netlify.app'
+                domain: 'jobsfinder-api.onrender.com'
             })
         .json({ success: true, token, user });
 }
