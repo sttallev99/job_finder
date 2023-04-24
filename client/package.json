@@ -54,5 +54,5 @@
   "devDependencies": {
     "@redux-devtools/extension": "^3.2.5"
   },
-  "proxy": "https://jobs-finder-server.herokuapp.com"
+  "proxy": "https://jobsfinder-api.onrender.com"
 }

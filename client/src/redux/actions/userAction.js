@@ -31,6 +31,7 @@ export const userSignInAction = (user) => async(dispatch) => {
     try {
         const { data } = await axios.post(`https://jobsfinder-api.onrender.com/api/signin`, user);
         localStorage.setItem('userInfo', JSON.stringify(data));
+        document.cookie = `token=${data.token}`
         dispatch({
             type: USER_SIGNIN_SUCCESS,
             payload: data
