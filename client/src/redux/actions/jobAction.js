@@ -20,7 +20,7 @@ import {
 export const jobLoadAction = (pageNumber, keyword='', cat='', location='') => async(dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST});
     try {
-        const { data } = await axios.get(`/api/jobs/show?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
+        const { data } = await axios.get(`https://jobs-finder-server.herokuapp.com/api/jobs/show?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
         dispatch({
             type: JOB_LOAD_SUCCESS,
             payload: data
@@ -37,7 +37,7 @@ export const jobLoadAction = (pageNumber, keyword='', cat='', location='') => as
 export const jobLoadSingleAction = (id) => async(dispatch) => {
     dispatch({ type: JOB_LOAD_SINGLE_REQUEST});
     try {
-        const { data } = await axios.get(`/api/job/${id}`);
+        const { data } = await axios.get(`https://jobs-finder-server.herokuapp.com/api/job/${id}`);
         dispatch({
             type: JOB_LOAD_SINGLE_SUCCESS,
             payload: data
@@ -53,7 +53,7 @@ export const jobLoadSingleAction = (id) => async(dispatch) => {
 export const createJobAction = (job) => async(dispatch) => {
     dispatch({ type: CREATE_JOB_REQUEST});
     try {
-        const { data } = await axios.post(`/api/job/create`, job);
+        const { data } = await axios.post(`https://jobs-finder-server.herokuapp.com/api/job/create`, job);
         dispatch({
             type: CREATE_JOB_SUCCESS,
         });
@@ -71,7 +71,7 @@ export const createJobAction = (job) => async(dispatch) => {
 export const deleteJobAction = (id) => async(dispatch) => {
     dispatch({ type: DELETE_JOB_REQUEST });
     try {
-        const { data } = await axios.delete(`/api/job/delete/${id}`);
+        const { data } = await axios.delete(`https://jobs-finder-server.herokuapp.com/api/job/delete/${id}`);
         dispatch({
             type: DELETE_JOB_SUCCESS,
         });

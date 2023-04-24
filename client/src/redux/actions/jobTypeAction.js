@@ -16,7 +16,7 @@ import {
 export const jobTypeLoadAction = () => async(dispatch) => {
     dispatch({ type: JOB_TYPE_LOAD_REQUEST});
     try {
-        const { data } = await axios.get('/api/type/jobs');
+        const { data } = await axios.get('https://jobs-finder-server.herokuapp.com/api/type/jobs');
         dispatch({
             type: JOB_TYPE_LOAD_SUCCESS,
             payload: data
@@ -34,7 +34,7 @@ export const jobTypeLoadAction = () => async(dispatch) => {
 export const createJobTypeAction = (jobType) => async(dispatch) => {
     dispatch({ type: CREATE_JOB_TYPE_REQUEST });
     try {
-        const { data } = await axios.post('/api/type/create', jobType);
+        const { data } = await axios.post('https://jobs-finder-server.herokuapp.com/api/type/create', jobType);
         dispatch({
             type: CREATE_JOB_TYPE_SUCCESS
         });
@@ -52,7 +52,7 @@ export const createJobTypeAction = (jobType) => async(dispatch) => {
 export const deleteJobTypeAction = (id) => async(dispatch) => {
     dispatch({ type: DELETE_JOB_TYPE_REQUEST });
     try {
-        const { data } = await axios.delete(`/api/type/delete/${id}`);
+        const { data } = await axios.delete(`https://jobs-finder-server.herokuapp.com/api/type/delete/${id}`);
         dispatch({
             type: DELETE_JOB_TYPE_SUCCESS
         });

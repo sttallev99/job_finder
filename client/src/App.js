@@ -62,7 +62,8 @@ const App = () => {
             </Routes>
           </BrowserRouter>
         </ProSidebarProvider>
-      </ThemeProvider>    
+      </ThemeProvider>
+
     </>
   )
 }
